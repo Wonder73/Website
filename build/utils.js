@@ -125,7 +125,8 @@ exports.htmlPlugin = function (){
       template:filePath,
       filename:filename+'.html',
       chunks:['manifest','vendor',filename],
-      inject:true
+      inject:true,
+      favicon: path.resolve('src/assets/favicon.ico')
     }
     if(process.env.NODE_ENV === 'production'){
       conf = merge(conf,{

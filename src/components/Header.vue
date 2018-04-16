@@ -8,10 +8,10 @@
     </div>
     <div class="nav">
       <ul class="pc-menu">
-        <li>学院首页</li>
+        <li><a href="./index.html">学院首页</a></li>
         <li>机构设置</li>
         <li>团务知识</li>
-        <li>新闻动态</li>
+        <li><a href="./news.html">新闻动态</a></li>
         <li>《理工青年》</li>
         <li>励志故事</li>
       </ul>
@@ -119,6 +119,16 @@ export default {
         text-align:center;
         line-height:40px;
         cursor:pointer;
+        a{
+          display:block;
+          width:100%;
+          height:100%;
+          color:#fff;
+          &:hover{
+            color:#b60404;
+            background:#fff;
+          }
+        }
         &:hover{
           color:#b60404;
           background:#fff;

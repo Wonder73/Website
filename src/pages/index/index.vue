@@ -173,6 +173,9 @@ export default {
         font-size:12px;
         color:#666;
         cursor:pointer;
+        &:hover{
+          color:#b60404;
+        }
       }
     }/*title*/
     .content{
@@ -260,6 +263,12 @@ export default {
               padding:10px 0;
               &:last-child{display:flex;}
             }
+            a{
+              color:#000;
+              &:hover{
+                color:#b60404;
+              }
+            }
           }/*li*/
           @media only screen and (max-width:500px){
             padding:5px 0;
@@ -314,6 +323,9 @@ export default {
           font-size:12px;
           color:#666;
           cursor:pointer;
+          &:hover{
+            color:#b60404;
+          }
         }
       }/*title*/
       &.notice{
@@ -384,6 +396,12 @@ export default {
                 }
               }
             }/*p.date*/
+            a{
+              color:#000;
+              &:hover{
+                color:#b60404;
+              }
+            }
           }/*li*/
         }/*ul*/
         @media only screen and (max-width:700px){
@@ -433,6 +451,12 @@ export default {
               color:#666;
               cursor:pointer;
             }/*span*/
+            a{
+              color:#000;
+              &:hover{
+                color:#b60404;
+              }
+            }
           }/*li*/
         }/*ul.content*/
         @media only screen and (max-width:700px){
