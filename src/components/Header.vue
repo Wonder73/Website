@@ -9,7 +9,7 @@
     <div class="nav">
       <ul class="pc-menu">
         <li><a href="./index.html">学院首页</a></li>
-        <li>机构设置</li>
+        <li><a href="./institution.html">机构设置</a></li>
         <li>团务知识</li>
         <li><a href="./news.html">新闻动态</a></li>
         <li>《理工青年》</li>
@@ -19,10 +19,10 @@
         <img src="../assets/menu.png" alt="" @click="phoneShow=!phoneShow">
         <transition name="phoneSlide">
           <ul v-show="phoneShow">
-            <li>学院首页</li>
-            <li>机构设置</li>
+            <li><a href="./index.html">学院首页</a></li>
+            <li><a href="./institution.html">机构设置</a></li>
             <li>团务知识</li>
-            <li>新闻动态</li>
+            <li><a href="./news.html">新闻动态</a></li>
             <li>《理工青年》</li>
             <li>励志故事</li>
           </ul>
@@ -172,6 +172,16 @@ export default {
           border-bottom:1px solid #a90808;
           &:first-child{
             border-top:1px solid #a90808;
+          }
+          a{
+            display:block;
+            width:100%;
+            height:100%;
+            color:#fff;
+            &:hover{
+              color:#b60404;
+              background:#fff;
+            }
           }
         }
       }
