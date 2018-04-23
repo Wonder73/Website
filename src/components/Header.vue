@@ -3,7 +3,12 @@
     <div class="logo">
       <img src="../assets/logo.png" alt="">
       <div class="search">
-        <input type="text" name="" value=""><el-button class="search-button el-icon-search" size="small"></el-button>
+        <input type="text" name="" v-model="searchValue" @focus="showSearch" @blur="blurSearch" @keydown="selectSearch"><el-button class="search-button el-icon-search" size="small" @click="search"></el-button>
+        <ul class="slideSearch" v-show="flag">
+          <li v-for="(value,index) of historySearch" :key="index" :class="{active:index === count}" @click="searchValue = value"><a href="#" @click="searchValue = value">{{value}}</a></li>
+          <li v-show="!historySearch.length"><a href="#">暂无历史记录</a></li>
+          <li @click="clearSearch" v-show="historySearch.length"><a href="#" @click="clearSearch">清除记录</a></li>
+        </ul>
       </div>
     </div>
     <div class="nav">
@@ -36,7 +41,53 @@
 export default {
   data(){
     return {
-      phoneShow:false
+      phoneShow:false,
+      searchValue:'',   //搜索框数据的双向绑定
+      historySearch:[],  //历史搜索记录
+      flag:false,
+      count:-1
+    }
+  },
+  methods:{
+    search(){        //点击搜索后
+      var searchValue = localStorage.searchValue?JSON.parse(localStorage.searchValue):[];
+      if(searchValue.indexOf(this.searchValue) < 0){
+        if(searchValue.length >= 5){
+          searchValue.shift();
+        }
+        searchValue.push(this.searchValue);
+        localStorage.searchValue = JSON.stringify(searchValue);
+        console.log(localStorage.searchValue);
+      }
+    },
+    showSearch(){       //获得焦点时显示
+      this.flag=true;
+      this.historySearch = localStorage.searchValue?JSON.parse(localStorage.searchValue).reverse():[];
+    },
+    blurSearch(){
+      setTimeout(()=>{
+        this.flag=false;
+        this.count=-1;
+      },100);
+    },
+    selectSearch(e){   //失去焦点时隐藏
+      var keyCode = e.keyCode;
+      var length = this.historySearch.length;
+      if(keyCode === 38){
+        if(--this.count < 0 ){
+          this.count = length-1;
+        }
+        this.searchValue = this.historySearch[this.count];
+      }else if(keyCode === 40){
+        if(++this.count >= length){
+          this.count = 0;
+        }
+        this.searchValue = this.historySearch[this.count];
+      }
+    },
+    clearSearch(){     //清除搜索记录
+      this.historySearch = [];
+      localStorage.clear('searchValue');
     }
   }
 }
@@ -62,6 +113,7 @@ export default {
       height:auto;
     }
     .search{
+      position:relative;
       display:flex;
       margin-top:30px;
       width:250px;
@@ -81,6 +133,33 @@ export default {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
       }/*.search-button*/
+      .slideSearch{
+        position:absolute;
+        top:97%;
+        width:214px;
+        background:#fff;
+        border:1px solid #ccc;
+        border-top:none;
+        border-radius:0 0 5px 5px;
+        li{
+          padding:8px 0;
+          font-size:14px;
+          text-indent:14px;
+          &.active,&:hover{
+            background:#b60404;
+            a{
+              color:#fff;
+            }
+          }
+          a{
+            display:block;
+            width:100%;
+            height:100%;
+            color:#333;
+          }
+        }
+        z-index:2;
+      }/*slideSearch*/
       @media only screen and(max-width:700px){
         display:none;
       }
