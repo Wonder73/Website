@@ -26,13 +26,7 @@
         </div><!--news-img-->
         <div class="news-title">
           <ul>
-            <li><a href="#" title="对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”">对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”</a><span>04-12</span></li>
-            <li><a href="#" title="对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”">对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”</a><span>04-12</span></li>
-            <li><a href="#" title="对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”">对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”</a><span>04-12</span></li>
-            <li><a href="#" title="对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”">对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”</a><span>04-12</span></li>
-            <li><a href="#" title="对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”">对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”</a><span>04-12</span></li>
-            <li><a href="#" title="对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”">对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”</a><span>04-12</span></li>
-            <li><a href="#" title="对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”">对标“四个走在全国前列”的殷殷嘱托：罗海鸥书记与理工学生谈“匠人匠心与快乐人生”</a><span>04-12</span></li>
+            <li v-for="(value,index) in newNews" :key="index"><a :href="'./detail.html?id='+value.id" :title="value.title">{{value.title}}</a><span>{{value.date.split(' ')[0].slice(5)}}</span></li>
           </ul>
         </div><!--news-title-->
       </div><!--content-->
@@ -68,6 +62,7 @@
 <script>
 import {mapGetters} from 'vuex';
 import {swiper,swiperSlide} from 'vue-awesome-swiper';
+import axios from 'axios';
 import vueHeader from '../../components/Header.vue';
 import vueFooter from '../../components/Footer.vue';
 import banner1 from '../../assets/banner1.jpg';
@@ -79,10 +74,23 @@ import news3 from '../../assets/news3.jpg';
 import news4 from '../../assets/news4.jpg';
 export default {
   name: 'App',
+  mounted(){
+    console.log('res');
+    axios.get('./static/php/news.php?opeartion=new').then((res)=>{       //获取后台数据
+      var data = JSON.stringify(res.data);
+      // console.log(data.replace('/\\\"/g','\''));
+      // console.log(typeof data);
+      // console.log(typeof JSON.parse(data));
+      this.newNews = JSON.parse(data);
+    }).catch((err)=>{
+      console.log(err);
+    });
+  },
   data(){
     return {
       banners:[banner1,banner2,banner3],
       news:[news1,news2,news3,news4],
+      newNews:[],          //存放最新的五条数据
       swiperOption: {//以下配置不懂的，可以去swiper官网看api，链接http://www.swiper.com.cn/api/
             // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
           notNextTick: true,

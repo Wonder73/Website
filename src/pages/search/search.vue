@@ -1,14 +1,15 @@
 <template>
-  <div id="news">
+  <div id="search">
     <vueHeader></vueHeader>
     <img src="../../assets/banner2.jpg" alt="">
-    <div class="news">
+    <div class="search">
       <div class="title">
         <img src="../../assets/left_nav01.jpg" alt="">
         <h1>理工新闻</h1>
       </div>
       <ul class="content">
-        <li v-for="(value,index) in allNews" v-if="(index<maxpager && index>=minpager)"><span><a :href="'./detail.html?id='+value.id">{{value.title}}</a></span><span>{{(value.date).split(" ")[0]}}</span></li>
+        <li v-for="(value,index) in allNews" v-if="(index<maxpager && index>=minpager)"><span><a href="0">{{value.title}}</a></span><span>{{(value.date).split(" ")[0]}}</span></li>
+        <li v-show="allNews.length===0" style="text-align:center;justify-content:center;background:none;">暂无搜索记录</li>
       </ul><!--ul.content-->
       <el-pagination
         background
@@ -19,25 +20,35 @@
         pager-count="5"
       ></el-pagination>
       <span class="loading" @click="loading($event)">加载更多...</span>
-    </div><!--news-->
+    </div><!--search-->
     <vueFooter></vueFooter>
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
+import axios from 'axios';
 import vueHeader from '../../components/Header.vue';
 import vueFooter from '../../components/Footer.vue';
 export default {
-  name: 'news',
-  created(){
-    this.$store.dispatch('getNews');
+  name: 'search',
+  mounted(){
+    var search = window.location.search.split('=')[1];
+    axios.get('./static/php/news.php?opeartion=search&search='+search).then((res)=>{
+      var data = JSON.stringify(res.data);
+      // console.log(data.replace('/\\\"/g','\''));
+      // console.log(typeof data);
+      // console.log(typeof JSON.parse(data));
+      this.allNews = JSON.parse(data);
+      // this.allNews=res.data;
+    });
   },
   data(){
     return {
       pagerCount:0,
-      pagerSize:15,    //一页显示多少条数据
-      clickNum:1        //点击加载更多的次数
+      pagerSize:15,       //一页显示的最大数据
+      clickNum:1,        //点击加载更多的次数
+      allNews:''        //用于存放搜索的数据
     }
   },
   components:{
@@ -45,11 +56,10 @@ export default {
     vueFooter
   },
   computed:{
-    ...mapGetters(['allNews']),
-    maxpager:function (){     //最大范围
+    maxpager:function (){   //最大的范围
       return this.pagerCount*this.pagerSize+this.pagerSize*this.clickNum
     },
-    minpager:function (){   //最小范围
+    minpager:function (){   //最小的范围
       return this.pagerCount*this.pagerSize
     }
   },
@@ -57,7 +67,7 @@ export default {
     handleSizeChange(val){
       this.pagerCount = val-1;
     },
-    loading(e){     //点击加载更多
+    loading(e){      //加载更多
       if(Math.ceil(this.allNews.length/this.pagerSize) <= ++this.clickNum){
         e.target.innerHTML="加载完毕"
       }
@@ -67,13 +77,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#news {
+#search {
   width:100%;
   &>img{
     width:100%;
     height:auto;
   }
-  .news{
+  .search{
     width:1200px;
     margin:10px auto;
     .title{
@@ -156,7 +166,7 @@ export default {
     @media only screen and (max-width:1200px){
       width:98%;
     }
-  }/*news*/
+  }/*search*/
 }
 </style>
 <style lang="scss">

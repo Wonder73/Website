@@ -6,42 +6,72 @@
         <h1>全部新闻</h1>
       </div>
       <ul class="content">
-        <li><span><a href="0">学校召开2018年学生工作会议学校召开2018年学生工作会议学校召开2018年学生工作会议学校召开2018年学生工作会议学校召开2018年学生工作会议学校召开2018年学生工作会议学校召开2018年学生工作会议学校召开2018年学生工作会议学校召开2018年学生工作会议学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
-        <li><span><a href="0">学校召开2018年学生工作会议</a></span><span>2018年04月16日</span><el-button-group style="width:88px;flex-shrink:0;"><el-button type="primary" icon="el-icon-edit" size="mini"></el-button><el-button type="danger" icon="el-icon-delete" size="mini"></el-button></el-button-group></li>
+        <li v-for="(value,index) in allNews" v-if="(index<maxpager && index>=minpager)">
+          <span><a :href="'./detail.html?id='+value.id">{{value.title}}</a></span><span>{{value.date.split(" ")[0]}}</span>
+          <el-button-group style="width:88px;flex-shrink:0;">
+          <el-button type="primary" icon="el-icon-edit" size="mini" @click="jumper(value.id)"></el-button>
+          <el-button type="danger" icon="el-icon-delete" size="mini" @click="deleteNews(value.id,index)"></el-button>
+        </el-button-group>
+      </li>
       </ul><!--ul.content-->
-      <ul class="list">
-        <li><i class="el-icon-arrow-left"></i></li>
-        <li>1</li>
-        <li>...</li>
-        <li>3</li>
-        <li class="active">4</li>
-        <li>5</li>
-        <li>...</li>
-        <li>100</li>
-        <li><i class="el-icon-arrow-right"></i></li>
-        <li><input type="text" value="0"></li>
-        <li>跳转</li>
-      </ul>
+      <el-pagination
+        background
+        @current-change="handleSizeChange"
+        layout="prev,pager,next,total,jumper"
+        :page-size="this.pagerSize"
+        :total="allNews.length"
+        pager-count="5"
+      ></el-pagination>
+      <span class="loading" @click="loading($event)">加载更多...</span>
     </div><!--news-->
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+import axios from 'axios';
 export default {
-  name: 'institution',
+  name:'institution',
+  created(){
+    this.$store.dispatch('getNews');
+  },
+  data(){
+    return {
+      pagerCount:0,     //   分页页码
+      pagerSize:15,    //一页显示几条数据
+      clickNum:1       //点击加载更多的次数
+    }
+  },
+  computed:{
+    ...mapGetters(['allNews']),
+    maxpager:function (){         //最大范围
+      return this.pagerCount*this.pagerSize+this.pagerSize*this.clickNum
+    },
+    minpager:function (){    //最小范围
+      return this.pagerCount*this.pagerSize
+    }
+  },
+  methods:{
+    handleSizeChange(val){
+      this.pagerCount = val-1;
+    },
+    loading(e){     //加载更多
+      if(Math.ceil(this.allNews.length/this.pagerSize) <= ++this.clickNum){
+        e.target.innerHTML="加载完毕"
+      }
+    },
+    deleteNews(id,index){   //删除数据
+      axios.get('./static/php/news.php?opeartion=delete&id='+id).then((res)=>{
+        if(res.data){
+          alert("删除成功！！！");
+          this.$store.dispatch('deleteNews',{index:index});
+        }
+      });
+    },
+    jumper(index){     //跳转到编辑路由
+      this.$router.push({name:'publish',params:{"articleId":index}});
+    }
+  }
 }
 </script>
 
@@ -120,46 +150,35 @@ export default {
         }
       }
     }/*ul.content*/
-    ul.list{
-      display:flex;
-      justify-content:center;
-      li{
-        display:flex;
-        justify-content: center;
-        align-items:center;
-        margin:0 2px;
-        width:35px;
-        height:35px;
-        font-size:14px;
-        color:#333;
-        border:1px solid #b60404;
-        border-radius:8px;
-        cursor:pointer;
-        &:nth-last-child(2){
-          overflow:hidden;
-          input{
-            text-align:center;
-            border:none;
-            width:100%;
-            height:100%;
-          }
-        }/*nth-last-child(2)*/
-        &:hover{
-          color:#b60404;
-        }
-        &.active{
-          color:#fff;
-          background:#b60404;
-        }/*active*/
-        @media only screen and (max-width:500px){
-          width:30px;
-          height:30px;
-        }
-      }/*li*/
-    }/*ul.list*/
+    .loading{
+      border:1px solid;
+      display:none;
+      padding:5px 0;
+      width:100%;
+      font-size:14px;
+      color:#fff;
+      text-align:center;
+      letter-spacing:2px;
+      background:#b60404;
+      @media only screen and(max-width:500px){
+        display:block;
+      }
+    }/*loading*/
     @media only screen and (max-width:1200px){
       width:98%;
     }
   }/*news*/
 }/*institution*/
+</style>
+<style lang="scss">
+.el-pagination{
+  display:flex;
+  justify-content:flex-end;
+  @media only screen and(max-width:500px){
+    display:none;
+  }
+}
+.el-pagination.is-background .el-pager li:not(.disabled).active{
+  background:#b60404 !important;
+}
 </style>

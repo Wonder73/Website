@@ -3,7 +3,7 @@
     <div class="logo">
       <img src="../assets/logo.png" alt="">
       <div class="search">
-        <input type="text" name="" v-model="searchValue" @focus="showSearch" @blur="blurSearch" @keydown="selectSearch"><el-button class="search-button el-icon-search" size="small" @click="search"></el-button>
+        <input type="text" name="" v-model="searchValue" @focus="showSearch" @blur="blurSearch" @keydown="selectSearch"><span class="search-button el-icon-search" size="small" @click="search"><a :href="searchSrc"></a></span>
         <ul class="slideSearch" v-show="flag">
           <li v-for="(value,index) of historySearch" :key="index" :class="{active:index === count}" @click="searchValue = value"><a href="#" @click="searchValue = value">{{value}}</a></li>
           <li v-show="!historySearch.length"><a href="#">暂无历史记录</a></li>
@@ -15,7 +15,7 @@
       <ul class="pc-menu">
         <li><a href="./index.html">学院首页</a></li>
         <li><a href="./institution.html">机构设置</a></li>
-        <li>团务知识</li>
+        <li><a href="./lore.html">团务知识</a></li>
         <li><a href="./news.html">新闻动态</a></li>
         <li>《理工青年》</li>
         <li>励志故事</li>
@@ -26,7 +26,7 @@
           <ul v-show="phoneShow">
             <li><a href="./index.html">学院首页</a></li>
             <li><a href="./institution.html">机构设置</a></li>
-            <li>团务知识</li>
+            <li><a href="./lore.html">团务知识</a></li>
             <li><a href="./news.html">新闻动态</a></li>
             <li>《理工青年》</li>
             <li>励志故事</li>
@@ -44,8 +44,13 @@ export default {
       phoneShow:false,
       searchValue:'',   //搜索框数据的双向绑定
       historySearch:[],  //历史搜索记录
-      flag:false,
+      flag:false,      //下拉搜索框的显示
       count:-1
+    }
+  },
+  computed:{
+    searchSrc(){    //搜索跳转的地址
+      return './search.html?search='+this.searchValue;
     }
   },
   methods:{
@@ -64,13 +69,13 @@ export default {
       this.flag=true;
       this.historySearch = localStorage.searchValue?JSON.parse(localStorage.searchValue).reverse():[];
     },
-    blurSearch(){
+    blurSearch(){     //失去焦点时隐藏
       setTimeout(()=>{
         this.flag=false;
         this.count=-1;
       },100);
     },
-    selectSearch(e){   //失去焦点时隐藏
+    selectSearch(e){   //搜索列表选择某一条数据
       var keyCode = e.keyCode;
       var length = this.historySearch.length;
       if(keyCode === 38){
@@ -126,12 +131,26 @@ export default {
         border-radius:3px 0 0 3px;
       }
       .search-button{
-        font-wieght:bold;
+        position:relative;
+        width:44px;
+        height:32px;
+        text-align:center;
+        font-weight:bold;
+        line-height:32px;
         color:#fff;
         background:#b60e0e;
         border:1px solid #b60404;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+        border-radius:0 3px 3px 0;
+        a{
+          position:absolute;
+          top:0;
+          left:0;
+          display:block;
+          width:100%;
+          height:100%;
+        }
       }/*.search-button*/
       .slideSearch{
         position:absolute;

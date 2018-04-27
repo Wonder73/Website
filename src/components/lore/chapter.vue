@@ -1,79 +1,42 @@
 <template>
-  <div id="news">
-    <vueHeader></vueHeader>
-    <img src="../../assets/banner2.jpg" alt="">
-    <div class="news">
+  <div id="chapter">
+    <div class="chapter">
       <div class="title">
         <img src="../../assets/left_nav01.jpg" alt="">
         <h1>理工新闻</h1>
       </div>
       <ul class="content">
-        <li v-for="(value,index) in allNews" v-if="(index<maxpager && index>=minpager)"><span><a :href="'./detail.html?id='+value.id">{{value.title}}</a></span><span>{{(value.date).split(" ")[0]}}</span></li>
+        <li>总则</li>
+        <li><a href="http://www1.gdpi.edu.cn/cms/tw/twzs/tz/188qkf2hfqnft.xhtml">第一章　团员</a></li>
+        <li><a href="http://www1.gdpi.edu.cn/cms/tw/twzs/tz/188qkf2h7i7lh.xhtml">第二章　团的组织制度</a></li>
+        <li><a href="http://www1.gdpi.edu.cn/cms/tw/twzs/tz/188qkf2h1dd4.xhtml">第三章　团的中央组织</a></li>
+        <li><a href="http://www1.gdpi.edu.cn/cms/tw/twzs/tz/188qkf2gq8c0o.xhtml">第四章　团的地方和军队的组织</a></li>
+        <li><a href="http://www1.gdpi.edu.cn/cms/tw/twzs/tz/188qkf2gd7lhj.xhtml">第五章　团的基层组织</a></li>
+        <li><a href="http://www1.gdpi.edu.cn/cms/tw/twzs/tz/188qkf2g65tc8.xhtml">第六章　团的干部</a></li>
+        <li><a href="http://www1.gdpi.edu.cn/cms/tw/twzs/tz/188qkf2g65tc8.xhtml">第七章　团旗、团徽、团歌、团员证</a></li>
+        <li><a href="http://www1.gdpi.edu.cn/cms/tw/twzs/tz/188qkf2fphppa.xhtml">第八章　团的经费</a></li>
+        <li><a href="http://www1.gdpi.edu.cn/cms/tw/twzs/tz/188qkf2fibmli.xhtml">第九章　团同少年先锋队的关系</a></li>
       </ul><!--ul.content-->
-      <el-pagination
-        background
-        @current-change="handleSizeChange"
-        layout="prev,pager,next,total,jumper"
-        :page-size="this.pagerSize"
-        :total="allNews.length"
-        pager-count="5"
-      ></el-pagination>
-      <span class="loading" @click="loading($event)">加载更多...</span>
-    </div><!--news-->
-    <vueFooter></vueFooter>
+    </div><!--chapter-->
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
 import vueHeader from '../../components/Header.vue';
 import vueFooter from '../../components/Footer.vue';
 export default {
-  name: 'news',
-  created(){
-    this.$store.dispatch('getNews');
-  },
-  data(){
-    return {
-      pagerCount:0,
-      pagerSize:15,    //一页显示多少条数据
-      clickNum:1        //点击加载更多的次数
-    }
-  },
-  components:{
-    vueHeader,
-    vueFooter
-  },
-  computed:{
-    ...mapGetters(['allNews']),
-    maxpager:function (){     //最大范围
-      return this.pagerCount*this.pagerSize+this.pagerSize*this.clickNum
-    },
-    minpager:function (){   //最小范围
-      return this.pagerCount*this.pagerSize
-    }
-  },
-  methods:{
-    handleSizeChange(val){
-      this.pagerCount = val-1;
-    },
-    loading(e){     //点击加载更多
-      if(Math.ceil(this.allNews.length/this.pagerSize) <= ++this.clickNum){
-        e.target.innerHTML="加载完毕"
-      }
-    }
-  }
+  name: 'chapter',
 }
 </script>
 
 <style lang="scss" scoped>
-#news {
+#chapter {
   width:100%;
   &>img{
     width:100%;
     height:auto;
   }
-  .news{
+  .chapter{
     width:1200px;
     margin:10px auto;
     .title{
@@ -137,6 +100,9 @@ export default {
             }
           }
         }
+        a{
+          color:#222;
+        }
       }
     }/*ul.content*/
     .loading{
@@ -156,7 +122,7 @@ export default {
     @media only screen and (max-width:1200px){
       width:98%;
     }
-  }/*news*/
+  }/*chapter*/
 }
 </style>
 <style lang="scss">

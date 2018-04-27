@@ -1,8 +1,8 @@
 import state from './state.js'
 
 const getters = {
-	count:function (){
-		return state.count;
+	allNews:function (){
+		return state.allNews;
 	}
 };
 

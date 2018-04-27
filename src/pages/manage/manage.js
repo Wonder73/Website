@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import manage from './manage.vue'
 import router from './router'
+import store from '../../store/index.js';
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '../../../static/ueditor/ueditor.config.js';
@@ -15,5 +16,6 @@ Vue.use(ElementUI);
 new Vue({
   el:"#manage",
   router,
+  store,
   render:h=>h(manage)
 })

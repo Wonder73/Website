@@ -7,14 +7,16 @@
     <ul class="content">
       <li><label for="title">标　　题：</label><input type="text" id="title" name="title" placeholder="标题" v-model="title"><span>*输入标题，但是不要过长</span></li>
       <li><label for="author">作　　者：</label><input type="text" id="author" name="author" placeholder="作者" v-model="author"><span>*输入作者，如果有多个作者请用逗号分隔。如：张三，李四，王五</span></li>
-      <li><label>发表时间：</label><el-date-picker size="small" placeholder="选择日期时间" type="datetime" v-model="datetime"></el-date-picker></li>
+      <li><label>发表时间：</label><el-date-picker size="small" placeholder="选择日期时间" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" v-model="datetime"></el-date-picker></li>
       <li><div id="editor" style="width:100%;"></div></li>
-      <li><el-button type="primary" icon="el-icon-upload" size="small">发表</el-button></li>
+      <li v-show="!articleId"><el-button type="primary" icon="el-icon-upload" size="small" @click="upload">发表</el-button></li>
+      <li v-show="articleId"><el-button type="primary" icon="el-icon-upload" size="small" @click="update">更新</el-button></li>
     </ul>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'publish',
   data(){
@@ -25,10 +27,49 @@ export default {
       author:''      //作者
     }
   },
+  computed:{
+    articleId(){     //路由传参
+      return this.$route.params.articleId;   //处理路由的参数
+    }
+  },
+  methods:{
+    upload(){         //提交数据
+      alert(this.editor.getContent());
+      var content = this.editor.getContent().replace(/\"/g,'\*');
+      var content = content.replace(/\&/g,'7');
+      axios.get('./static/php/news.php?opeartion=insert&title='+this.title+'&author='+this.author+'&content='+content+'&datetime='+this.datetime).then((res)=>{
+        if(res.data){
+          alert('插入成功！！！');
+          this.datetime = '';
+          this.title = '';
+          this.author = '';
+          this.editor.setContent('');
+        }
+      });
+    },
+    update(){    //更新数据
+      var content = this.editor.getContent().replace(/\"/g,'\*');
+      axios.get('./static/php/news.php?opeartion=update&title='+this.title+'&author='+this.author+'&content='+content+'&datetime='+this.datetime+'&id='+this.articleId).then((res)=>{
+        if(res.data){
+          alert('更新成功！！！');
+        }
+      });
+    }
+  },
   mounted(){
     this.editor = UE.getEditor('editor',{
         initialFrameHeight: 400
     });
+    if(this.articleId){   //编辑数据的初始化
+      axios.get('./static/php/news.php?opeartion=showRow&id='+this.articleId).then((res)=>{
+        this.datetime = res.data[0].date;
+        this.title = res.data[0].title;
+        this.author = res.data[0].author;
+        setTimeout(()=>{
+          this.editor.setContent(res.data[0].content);
+        },100);
+      })
+    }
   },
   destroyed(){
     this.editor.destroy();
