@@ -1,24 +1,53 @@
 <template lang="html">
   <div class="login">
     <img src="../../assets/logo.png" alt="">
-    <div class="user"><i class="fa fa-user"></i><input type="text" placeholder="用户名"></div>
-    <div class="password"><i class="fa fa-lock"></i><input type="text" placeholder="用户密码"></div>
-    <div class="identify"><input type="text" placeholder="验证码" :value="identifyNum"><identify></identify></div>
-    <input type="button" name="" value="登录">
+    <div class="user"><i class="fa fa-user" for="username"></i><input type="text" placeholder="用户名" v-model="username" id="username"></div>
+    <div class="password error"><i class="fa fa-lock" for="password"></i><input type="password" placeholder="用户密码" v-model="password" id="password"></div>
+    <div class="identify" v-show="count>=5"><input type="text" placeholder="验证码" v-model="identifyNumber"><identify @identify="showMsg"></identify></div>
+    <p style="color:red;text-align:center;">{{errorInfo}}</p>
+    <input type="button" name="" value="登录" @click="login">
   </div>
 </template>
 
 <script>
-import identify from '../../components/identify.vue'
+import identify from '../../components/identify.vue';
+import axios from 'axios';
 export default {
   data(){
     return {
-      identifyNum:''
+      identifyNum:'',
+      count:0,   //记录错误的次数
+      username:'',
+      password:'',
+      identifyNumber:'',
+      errorInfo:''
     }
   },
   methods:{
     showMsg(identigy){
-      this.identifyNum=identigy;
+      this.identifyNum=identigy.toLowerCase();
+    },
+    login(){
+      if(this.count < 5 || this.identifyNum === this.identifyNumber.toLowerCase()){
+        axios.get('./static/php/login.php?opeartion=login&username='+this.username+'&password='+this.password).then((res)=>{
+          if(res.data == '1'){
+            document.cookie='username='+this.username;
+            document.cookie='password='+this.password;
+            window.open('./manage.html',"_self");
+            this.count = 0;
+            this.errorInfo="";
+          }else{
+            this.count++;
+            if(this.username && this.password){
+              this.errorInfo="用户名或密码错误！！！";
+            }else{
+              this.errorInfo="用户名或密码不能为空！！！";
+            }
+          }
+        });
+      }else{
+        this.errorInfo="验证码输入错误！！！";
+      }
     }
   },
   components:{
@@ -93,7 +122,7 @@ window.onload = function (){
     @media only screen and (max-width:300px){width:100%;}
   }
   &>div.identify{
-    display:none;
+    // display:none;
     input{
       width:60%;
       @media only screen and (max-width:300px){width:50%;}

@@ -3,11 +3,40 @@
     <p><span>版权 © 广东理工职业学院团委</span> <span>联系电话：<i>020-83501532 0765-89911501</i></span> <span>团委邮箱：xtw@gdrtvu.edu.cn</span></p>
     <p><span>广州校本部地址：<i>广州市越秀区下塘西路3号</i></span> <span>邮编：510091</span></p>
     <p><span>中山校区地址：<i>广东省中山市五桂山职业教育园区</i></span> <span>邮编：528458</span><a href="./login.html">登录</a></p>
+    <transition name="fade">
+      <div class="go_top" @click="goTop" v-show="showGoTop"><i class="el-icon-arrow-up"></i></div>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
+  mounted(){
+    window.addEventListener('scroll',()=>{
+      if(document.documentElement.scrollTop > 0){
+        this.showGoTop = true;
+      }else{
+        this.showGoTop = false;
+      }
+    });
+  },
+  data(){
+    return {
+      showGoTop:false
+    }
+  },
+  methods:{
+    goTop(){    //回顶部
+      // var scrollTop = document.documentElement.scrollTop;
+      var i = 0;
+      var timer = setInterval(()=>{
+        document.documentElement.scrollTop -=i++;
+        if(document.documentElement.scrollTop <= 0){
+          clearInterval(timer);
+        }
+      },10);
+    }
+  }
 }
 </script>
 
@@ -53,5 +82,33 @@ export default {
       letter-spacing:2px;
     }
   }
-}
+  .go_top{
+    position:fixed;
+    top:80%;
+    right:3%;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    width:30px;
+    height:30px;
+    border:2px solid #b60404;
+    border-radius:5px;
+    z-index:19;
+    cursor:pointer;
+    i{
+      color:#b60404;
+    }
+  }
+
+  /*动画*/
+  .fade-enter-active,.fade-leave-active{
+    transition:opacity 0.5s;
+  }
+  .fade-enter,.fade-leave-to{
+    opacity:0;
+  }
+  .fade-leave,fade-enter-to{
+    opacity:1;
+  }
+}/*footer*/
 </style>

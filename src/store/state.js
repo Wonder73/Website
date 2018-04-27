@@ -1,5 +1,5 @@
 const state = {
-	count:77
+	allNews:''
 };
 
 export default state;
