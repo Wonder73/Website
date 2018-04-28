@@ -35,12 +35,12 @@
       <div class="notice">
         <div class="title"><img src="../../assets/news02.png"><h1>公告通知</h1><span>更多+</span></div>
         <ul class="content">
-          <li><p class="date"><span>10-01</span><span>1001</span></p><a href="#" title="采购公告——广东开放大学(广东理工职业学院)数字媒体制作总控室及增补设备采购项目">采购公告采购公告采购公告采购公告——广东开放大学(广东理工职业学院)数字媒体制作总控室及增补设备采购项目</a></li>
-          <li><p class="date"><span>10-01</span><span>1001</span></p><a href="#" title="采购公告——广东开放大学(广东理工职业学院)数字媒体制作总控室及增补设备采购项目">采购公告——广东开放大学(广东理工职业学院)数字媒体制作总控室及增补设备采购项目</a></li>
-          <li><p class="date"><span>10-01</span><span>1001</span></p><a href="#" title="采购公告——广东开放大学(广东理工职业学院)数字媒体制作总控室及增补设备采购项目">采购公告——广东开放大学(广东理工职业学院)数字媒体制作总控室及增补设备采购项目</a></li>
-          <li><p class="date"><span>10-01</span><span>1001</span></p><a href="#" title="采购公告——广东开放大学(广东理工职业学院)数字媒体制作总控室及增补设备采购项目">采购公告——广东开放大学(广东理工职业学院)数字媒体制作总控室及增补设备采购项目</a></li>
-          <li><p class="date"><span>10-01</span><span>1001</span></p><a href="#" title="采购公告——广东开放大学(广东理工职业学院)数字媒体制作总控室及增补设备采购项目">采购公告——广东开放大学(广东理工职业学院)数字媒体制作总控室及增补设备采购项目</a></li>
-          <li><p class="date"><span>10-01</span><span>1001</span></p><a href="#" title="采购公告——广东开放大学(广东理工职业学院)数字媒体制作总控室及增补设备采购项目">采购公告——广东开放大学(广东理工职业学院)数字媒体制作总控室及增补设备采购项目</a></li>
+          <li><p class="date"><span>10-01</span><span>1001</span></p><a href="#" title="采购公告——xxx大学(xxx学院)数字媒体制作总控室及增补设备采购项目">采购公告采购公告采购公告采购公告——xxx大学(xxx职业学院)数字媒体制作总控室及增补设备采购项目</a></li>
+          <li><p class="date"><span>10-01</span><span>1001</span></p><a href="#" title="采购公告——xxx大学(xxx学院)数字媒体制作总控室及增补设备采购项目">采购公告——xxx大学(xxx职业学院)数字媒体制作总控室及增补设备采购项目</a></li>
+          <li><p class="date"><span>10-01</span><span>1001</span></p><a href="#" title="采购公告——xxx大学(xxx职业学院)数字媒体制作总控室及增补设备采购项目">采购公告——xxx大学(xxx职业学院)数字媒体制作总控室及增补设备采购项目</a></li>
+          <li><p class="date"><span>10-01</span><span>1001</span></p><a href="#" title="采购公告——xxx大学(xxx职业学院)数字媒体制作总控室及增补设备采购项目">采购公告——xxx大学(xxx职业学院)数字媒体制作总控室及增补设备采购项目</a></li>
+          <li><p class="date"><span>10-01</span><span>1001</span></p><a href="#" title="采购公告——xxx大学(xxx职业学院)数字媒体制作总控室及增补设备采购项目">采购公告——xxx大学(xxx职业学院)数字媒体制作总控室及增补设备采购项目</a></li>
+          <li><p class="date"><span>10-01</span><span>1001</span></p><a href="#" title="采购公告——xxx大学(xxx职业学院)数字媒体制作总控室及增补设备采购项目">采购公告——xxx大学(xxx职业学院)数字媒体制作总控室及增补设备采购项目</a></li>
         </ul>
       </div><!--notice-->
       <div class="work">

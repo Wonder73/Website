@@ -16,7 +16,7 @@
         <li><span>学生会</span><span>会长：XXX</span></li>
         <li><span>社团联合会</span><span>会长：XXX</span></li>
         <li><span>青年志愿者协会（红十字会）</span><span>会长：XXX</span></li>
-        <li><span>《理工青年》工作室</span><span>室长：XXX</span></li>
+        <li><span>《xxx青年》工作室</span><span>室长：XXX</span></li>
         <li><span>艺术团</span><span>团长：XXX</span></li>
         <li><span>广播站</span><span>站长：XXX</span></li>
       </ul>

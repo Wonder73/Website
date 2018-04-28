@@ -5,7 +5,7 @@
     <div class="search">
       <div class="title">
         <img src="../../assets/left_nav01.jpg" alt="">
-        <h1>理工新闻</h1>
+        <h1>搜索结果</h1>
       </div>
       <ul class="content">
         <li v-for="(value,index) in allNews" v-if="(index<maxpager && index>=minpager)"><span><a href="0">{{value.title}}</a></span><span>{{(value.date).split(" ")[0]}}</span></li>
