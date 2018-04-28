@@ -1,4 +1,4 @@
-# demo-mysql2
+# 实训项目
 
 > A Vue.js project
 
